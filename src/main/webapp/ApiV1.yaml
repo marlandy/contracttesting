@@ -1,0 +1,167 @@
+---
+swagger: "2.0"
+info:
+  description: "Online retail API"
+  version: "1.0.0"
+  title: "Order API"
+  contact:
+    email: "xxx@yyy.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:4010"
+basePath: "/awesomesite/api/v1"
+tags:
+- name: "order"
+  description: ""
+schemes:
+- "http"
+paths:
+  /orders/{id}:
+    get:
+      tags:
+      - "order"
+      description: "Returns an order by id"
+      operationId: getOrderById
+      produces:
+      - application/json;charset=UTF-8
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        format: uuid
+        description: ID of the Order
+        x-example: "27a5c73a-620f-4eba-b052-33c13472b5f4"
+      responses:
+        200:
+          description: "request successful"
+          schema:
+            $ref: "#/definitions/Order"        
+        400:
+          description: "Invalid input data"
+          schema:
+            $ref: "#/definitions/ErrorResponse"        
+        404:
+          description: "Order not found"                                       
+  /orders:
+    get:
+      tags:
+      - "orders"    
+      description: Get a collection of orders
+      operationId: getOrders
+      produces:
+      - application/json;charset=UTF-8
+      parameters:
+      - name: from
+        in: query
+        type: number
+        description: first order to retrieve 
+        default: 0
+        x-example: 1
+      - name: limit
+        in: query
+        required: true
+        type: number
+        description: maximum number of items
+        maximum: 100
+        x-example: 20  
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Orders"
+        400:
+          description: "Invalid input data"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Nothing found"
+    post:
+      tags:
+      - "order"
+      - "create"    
+      description: Creates a new order
+      operationId: createOrder
+      produces:
+      - application/json;charset=UTF-8
+      consumes:
+      - application/json;charset=UTF-8
+      parameters:
+      - name: body
+        in: body        
+        required: true
+        schema:
+          $ref: '#/definitions/NewOrder'
+          example: {"price": 3.56, "voucher": "AF0012"}
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Order"
+        400:
+          description: "Invalid input data"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  Order:
+    type: "object"
+    required:
+    - id
+    - price
+    - status
+    properties:
+      id:
+        type: string
+        format: uuid        
+      price:
+        type: number
+        format: double
+        minimum: 0
+      voucher:
+        type: string
+        pattern: '^[0-9A-Z]{6,8}$'        
+      status:
+        type: "number"
+        description: "Order status: 1 (CREATED), 2 (FINISHED), 3 (CANCELED)"
+        enum:
+        - 1
+        - 2
+        - 3      
+  NewOrder:
+    type: "object"
+    required:
+    - price
+    - voucher
+    properties:
+      price:
+        type: number
+        format: double
+        minimum: 0
+      voucher:
+        type: string
+        pattern: '^[0-9A-Z]{6,8}$'      
+  Orders:
+    type: object
+    required: 
+    - orders
+    - total
+    properties:
+      orders:
+        type: array
+        items:
+          $ref: "#/definitions/Order"
+      total:
+        type: number
+        minimum: 0       
+  ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
