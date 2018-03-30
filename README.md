@@ -1,7 +1,7 @@
 # REST API documented using Swagger 2.0
 
 
-## Post
+## Post
 
 You can read it here: <a href="#" target="_blank">Contract testing using Swagger, Prism and Dredd</a>
 
@@ -26,13 +26,13 @@ You can see the <a href="https://github.com/marlandy/contracttesting/blob/master
   * start Apache Tomcat
   * http://localhost:8080/awesomesite
  
-##  Running Dredd
+## Running Dredd
 
  * Start the service 
  * Install dredd: **npm install -g dredd**
  * Execute: **dredd http://localhost:8080/awesomesite/ApiV1.yaml http://localhost:8080**
 
-## Starting prism server
+## Starting Prism server
 
  * Install prism from https://stoplight.io/platform/prism/
  * Execute: prism run --mock --list --spec ${PROJECT_HOME}/src/main/webapp/ApiV1.yaml 
