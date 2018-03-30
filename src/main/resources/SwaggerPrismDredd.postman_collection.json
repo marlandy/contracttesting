@@ -1,0 +1,92 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SwaggerPrismDredd",
+		"_postman_id": "c4e16cc0-eeac-383b-52ed-980f48edc939",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get orders",
+			"request": {
+				"url": {
+					"raw": "http://localhost:4010/awesomesite/api/v1/orders?limit=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4010",
+					"path": [
+						"awesomesite",
+						"api",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get order by id",
+			"request": {
+				"url": "http://localhost:4010/awesomesite/api/v1/orders/33cce036-6236-1ebc-80a2-55b1b4a2b522",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Add order",
+			"request": {
+				"url": "http://localhost:4010/awesomesite/api/v1/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\": 22.12,\n    \"voucher\": \"VWGXT3I\"\n}"
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}
