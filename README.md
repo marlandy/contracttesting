@@ -3,7 +3,7 @@
 
 ## Post
 
-You can read it here: <a href="#" target="_blank">Contract testing using Swagger, Prism and Dredd</a>
+You can read it here: [Contract testing using Swagger, Prism and Dredd](https://medium.com/@m_arlandy/contract-testing-for-microservices-using-swagger-prism-and-dredd-efdd463b9433)
 
 ## API documentation
 
